@@ -6,23 +6,25 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
 import requests
+from datetime import datetime
+from utils import get_all_users
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 app.wsgi_app = WhiteNoise(app.wsgi_app, root='static/')
-app.secret_key = os.getenv('SECRET_KEY', os.urandom(24))
+app.secret_key = 'your-secret-key-here'  # In production, use a secure secret key
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///company_a.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///company_a.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Company configuration
 COMPANY_NAME = "Company A"
-COMPANY_B_URL = os.getenv('COMPANY_B_URL', 'http://company-b.example.com')
-COMPANY_C_URL = os.getenv('COMPANY_C_URL', 'http://company-c.example.com')
+COMPANY_B_URL = 'http://localhost:5002'
+COMPANY_C_URL = 'http://localhost:5003'
 
 # User model for database
 class CompanyUser(db.Model):
@@ -148,6 +150,16 @@ def logout():
     logout_user()
     flash('You have been logged out', 'info')
     return redirect(url_for('home'))
+
+@app.route('/users')
+@login_required
+def all_users_view():
+    if not current_user.is_admin:
+        flash('Access denied. Admin privileges required.', 'error')
+        return redirect(url_for('index'))
+    
+    all_users = get_all_users()
+    return render_template('users.html', all_users=all_users)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5001)), debug=True) 

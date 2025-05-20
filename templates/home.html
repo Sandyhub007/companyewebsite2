@@ -3,36 +3,17 @@
 {% block title %}Home - Company Website{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-8 offset-md-2 text-center">
-        <h1 class="display-4 mb-4">Welcome to Our Company</h1>
-        <p class="lead mb-4">We are a leading technology company dedicated to innovation and excellence.</p>
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Our Mission</h5>
-                        <p class="card-text">To provide innovative solutions that transform businesses and improve lives.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Our Vision</h5>
-                        <p class="card-text">To be the global leader in technological innovation and digital transformation.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Our Values</h5>
-                        <p class="card-text">Integrity, Innovation, Excellence, and Customer Focus drive everything we do.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Company Portal</h1>
+        <p class="lead">A secure platform for managing users across multiple companies.</p>
+        <hr class="my-4">
+        <p>Access the admin dashboard to view and manage users from all participating companies.</p>
+        {% if not current_user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login</a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" href="{{ url_for('admin_dashboard') }}" role="button">Go to Dashboard</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %} 
