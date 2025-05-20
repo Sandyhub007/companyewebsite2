@@ -5,9 +5,12 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <h2 class="mb-4">Company Users Dashboard</h2>
+        
+        <!-- Company A Users -->
+        <div class="card mb-4">
             <div class="card-header">
-                <h3>Website Users</h3>
+                <h3>Company A Users</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -17,14 +20,78 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Department</th>
+                                <th>Company</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for user in users %}
+                            {% for user in local_users %}
                             <tr>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.department }}</td>
+                                <td>{{ user.company }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company B Users -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Company B Users</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in company_b_users %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.department }}</td>
+                                <td>{{ user.company }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company C Users -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Company C Users</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Company</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in company_c_users %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.department }}</td>
+                                <td>{{ user.company }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
